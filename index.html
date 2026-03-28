@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Opheilo Embassy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050505;
+      --bg-soft: #0d0d0d;
+      --bg-card: rgba(255, 255, 255, 0.03);
+      --text: #f5f5f5;
+      --text-soft: #cfcfcf;
+      --silver: #c0c0c0;
+      --silver-bright: #e6e6e6;
+      --silver-dark: #8d8d8d;
+      --line: rgba(255, 255, 255, 0.12);
+      --glow: rgba(192, 192, 192, 0.18);
+      --max: 1200px;
+      --radius: 24px;
+      --shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.07), transparent 20%),
+        linear-gradient(180deg, #0a0a0a 0%, #050505 35%, #020202 100%);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.03) 50%, transparent 100%);
+      opacity: 0.25;
+      mix-blend-mode: screen;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--silver-bright);
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      font-size: 0.78rem;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+      content: "";
+      width: 32px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--silver), transparent);
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+      letter-spacing: 0.02em;
+      font-weight: 600;
+      line-height: 1.06;
+    }
+
+    h1 {
+      font-size: clamp(3.3rem, 8vw, 6.8rem);
+      max-width: 980px;
+    }
+
+    h2 {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      margin-bottom: 22px;
+    }
+
+    h3 {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      margin-bottom: 14px;
+    }
+
+    p {
+      color: var(--text-soft);
+      font-size: 1.02rem;
+    }
+
+    .section {
+      padding: 110px 0;
+      position: relative;
+    }
+
+    .section + .section {
+      border-top: 1px solid var(--line);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 36px 0 80px;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -120px;
+      top: 10%;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(230,230,230,0.14) 0%, rgba(192,192,192,0.08) 25%, transparent 65%);
+      filter: blur(16px);
+      opacity: 0.85;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(16px);
+      background: rgba(5, 5, 5, 0.72);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--silver-bright);
+    }
+
+    .brand small {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.28em;
+      color: var(--text-soft);
+      margin-top: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      font-size: 0.92rem;
+      color: var(--text-soft);
+    }
+
+    .nav-links a {
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--silver-bright);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 44px;
+      align-items: end;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-copy p {
+      max-width: 760px;
+      font-size: 1.08rem;
+      margin-top: 24px;
+    }
+
+    .hero-actions {
+      margin-top: 34px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 24px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+      color: var(--text);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.3);
+    }
+
+    .button.primary {
+      background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(192,192,192,0.06));
+      box-shadow: 0 12px 40px var(--glow);
+    }
+
+    .button.secondary {
+      background: transparent;
+    }
+
+    .hero-panel,
+    .card,
+    .embassy-card,
+    .step,
+    .quote-block {
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-panel {
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent 45%);
+      pointer-events: none;
+    }
+
+    .panel-title {
+      font-size: 0.8rem;
+      letter-spacing: 0.22em;
+      color: var(--silver-bright);
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .panel-line {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      margin-bottom: 18px;
+      color: var(--text);
+    }
+
+    .panel-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .pill {
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 14px 16px;
+      color: var(--text-soft);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .card {
+      padding: 34px;
+      height: 100%;
+    }
+
+    .card ul {
+      list-style: none;
+      margin-top: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .card li {
+      position: relative;
+      padding-left: 24px;
+      color: var(--text-soft);
+    }
+
+    .card li::before {
+      content: "✦";
+      position: absolute;
+      left: 0;
+      color: var(--silver);
+      font-size: 0.85rem;
+      top: 2px;
+    }
+
+    .statement {
+      margin-top: 32px;
+      text-align: center;
+      padding: 26px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      color: var(--silver-bright);
+      letter-spacing: 0.03em;
+    }
+
+    .quote-block {
+      padding: 38px;
+    }
+
+    .quote-block p {
+      font-size: 1.05rem;
+      margin-top: 18px;
+    }
+
+    .mission-copy {
+      display: grid;
+      gap: 18px;
+    }
+
+    .mission-copy p {
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--silver-bright);
+      font-size: 0.98rem;
+    }
+
+    .vision-grid,
+    .embassy-grid,
+    .steps-grid {
+      display: grid;
+      gap: 22px;
+    }
+
+    .embassy-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 30px;
+    }
+
+    .embassy-card {
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .embassy-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
+      opacity: 0.7;
+    }
+
+    .embassy-card h3 {
+      margin-bottom: 10px;
+    }
+
+    .steps-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      margin-top: 28px;
+    }
+
+    .step {
+      padding: 28px 22px;
+      text-align: left;
+      min-height: 220px;
+    }
+
+    .step-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      color: var(--silver-bright);
+      margin-bottom: 12px;
+    }
+
+    .step p {
+      font-size: 0.97rem;
+    }
+
+    .final-section {
+      padding-bottom: 130px;
+    }
+
+    .centered {
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .centered p + p {
+      margin-top: 12px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 28px 0 44px;
+      color: #9f9f9f;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .two-col,
+      .embassy-grid,
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .steps-grid .step {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav-inner {
+        align-items: flex-start;
+        padding: 16px 0;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        gap: 14px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 50px;
+      }
+
+      .section {
+        padding: 84px 0;
+      }
+
+      .hero-panel,
+      .card,
+      .embassy-card,
+      .step,
+      .quote-block {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#top" class="brand">
+        Opheilo Embassy
+        <small>Establishing What Ought to Be</small>
+      </a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#model">Model</a>
+        <a href="#mission">Mission</a>
+        <a href="#embassies">Embassies</a>
+        <a href="#process">How It Works</a>
+        <a href="#partners">Partners</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="container hero-grid">
+      <div class="hero-copy fade-up">
+        <div class="eyebrow">Kingdom Formation Across the City</div>
+        <h1>A Disciple-Making Organism Training Ambassadors of the Kingdom in Every Sphere</h1>
+        <p>
+          A network of missional communities made up of house churches and businesses across the city,
+          forming disciples and sending them as ambassadors of the Kingdom of God.
+        </p>
+        <p>
+          Opheilo Embassy equips believers to be transformed by the Gospel and trained to live as ambassadors
+          of Christ, leveraging business, influence, and everyday environments to make His Kingdom visible in the city.
+        </p>
+        <div class="hero-actions">
+          <a href="#about" class="button primary">Discover the Vision</a>
+          <a href="#partners" class="button secondary">Partner With Us</a>
+        </div>
+      </div>
+
+      <aside class="hero-panel fade-up">
+        <div class="panel-title">The Framework</div>
+        <div class="panel-line">Formation in homes. Expression in the city.</div>
+        <div class="panel-stack">
+          <div class="pill">House Annexes for discipleship, prayer, Scripture, and shared life.</div>
+          <div class="pill">Business Embassies that engage real needs and open doors for transformation.</div>
+          <div class="pill">A complementary expression that carries the life of the Church into everyday environments.</div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <section class="section" id="about">
+    <div class="container two-col">
+      <div class="fade-up">
+        <div class="eyebrow">What Is Opheilo?</div>
+        <h2>What Is Opheilo Embassy?</h2>
+        <p>
+          Opheilo Embassy is a family of ambassadors who believe that every area of life has an “ought” according
+          to the heart of God.
+        </p>
+        <p style="margin-top: 18px;">
+          The Christian’s marriage ought to be lived a certain way according to the heart of God. The Christian’s business ought to be run a certain way according to the heart of God. The Church ought to live and love a certain way according to the heart of God.
+        </p>
+      </div>
+      <div class="quote-block fade-up">
+        <h3>Kingdom Definition for Every Sphere</h3>
+        <p>
+          We believe Jesus is not only Savior, but King, and His Kingdom brings definition to how life is meant to be lived.
+        </p>
+        <p>
+          We also believe the Church, as seen in the book of Acts, was never meant to be limited to a single expression, but to function as a living, active body moving in both gathered and sent forms.
+        </p>
+        <p>
+          We are not opposed to the modern church expression. We believe it plays a vital role. But we also believe there must be both gathered spaces and sent expressions working together.
+        </p>
+        <p>
+          Opheilo exists as a complementary expression, a mobilized extension that helps carry the life of the Church into everyday environments across the city.
+        </p>
+        <p>
+          We are building a people who live as ambassadors of Jesus Christ, representing His nature, His authority, and His Kingdom in every sphere of life.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="model">
+    <div class="container">
+      <div class="fade-up centered" style="margin-bottom: 40px;">
+        <div class="eyebrow">Our Model</div>
+        <h2>Formation in Homes. Expression in the City.</h2>
+      </div>
+      <div class="two-col">
+        <div class="card fade-up">
+          <h3>House Annexes <span style="color: var(--silver);">(Formation)</span></h3>
+          <p>
+            A house annex is a smaller extension of a larger body, designed for intentional development and focused growth.
+          </p>
+          <p style="margin-top: 14px;">
+            Our house annexes are small, intimate communities where disciples are formed in the context of real relationship and shared life.
+          </p>
+          <ul>
+            <li>Deeply discipled</li>
+            <li>Grounded in Scripture</li>
+            <li>Shaped in character</li>
+            <li>Rooted in prayer and shared life</li>
+          </ul>
+          <p style="margin-top: 18px; color: var(--silver-bright);">This is where transformation happens.</p>
+        </div>
+        <div class="card fade-up">
+          <h3>Business Embassies <span style="color: var(--silver);">(Expression)</span></h3>
+          <p>
+            Our business embassies are public-facing environments embedded throughout the city.
+          </p>
+          <ul>
+            <li>Engage people where they already are</li>
+            <li>Create natural opportunities for connection</li>
+            <li>Demonstrate kingdom culture in real environments</li>
+            <li>Serve as points of outreach and influence</li>
+          </ul>
+          <p style="margin-top: 18px; color: var(--silver-bright);">This is where disciples are sent.</p>
+        </div>
+      </div>
+      <div class="statement fade-up">We disciple in homes and deploy in the city.</div>
+    </div>
+  </section>
+
+  <section class="section" id="mission">
+    <div class="container two-col">
+      <div class="fade-up">
+        <div class="eyebrow">Our Mission</div>
+        <h2>Our Mission</h2>
+      </div>
+      <div class="mission-copy fade-up">
+        <p>We exist to make disciples who are completely transformed, shaped, and mobilized by the Gospel of Jesus Christ making His love and power made known to all men.</p>
+        <p>We believe that Jesus is King and He has a desire for His Church to live in a specific manner, with a specific revelation, moving with a specific dominion.</p>
+        <p>We are committed to fulfilling His desires by His Spirit, that all that ought to be will be established in the city, according to His heart.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="vision">
+    <div class="container two-col">
+      <div class="quote-block fade-up">
+        <div class="eyebrow">Our Vision</div>
+        <h2>Our Vision</h2>
+        <p>
+          We envision a city filled with house embassies where disciples are developed, trained, and equipped to walk in deep intimacy with Jesus and carry His light into every place of darkness.
+        </p>
+        <p>
+          Through these communities, ambassadors of Christ will be raised to influence culture, demonstrate the power of God, and prepare the city for His coming.
+        </p>
+      </div>
+      <div class="quote-block fade-up">
+        <div class="eyebrow">Why We Exist</div>
+        <h2>Why We Exist</h2>
+        <p>
+          We exist because we are men and women after the heart of God.
+        </p>
+        <p>
+          We believe that when Jesus spoke of His Church, He had a clear picture in mind, a people formed in His image, living by His Spirit, and expressing His Kingdom in the earth.
+        </p>
+        <p>
+          Our desire is not to build something new for its own sake, but to allow His vision for His Church to find expression.
+        </p>
+        <p style="color: var(--silver-bright);">
+          For His glory. And for the salvation of as many souls as possible.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="embassies">
+    <div class="container">
+      <div class="centered fade-up">
+        <div class="eyebrow">Our Embassies in the City</div>
+        <h2>Businesses That Open Doors for Transformation</h2>
+        <p>
+          Each embassy is a fully functioning business designed to engage real needs, create meaningful environments,
+          and open the door for transformation in everyday life.
+        </p>
+      </div>
+
+      <div class="embassy-grid">
+        <article class="embassy-card fade-up">
+          <h3>Hawkins House</h3>
+          <p>
+            A Christ-centered family development initiative focused on restoring and strengthening the foundation of the home.
+          </p>
+          <p style="margin-top: 14px;">
+            Hawkins House equips parents to intentionally build a culture of discipleship within their families through clear, comprehensive pathways. It helps transform the home from a place of routine into a place of formation, where faith is lived, modeled, and multiplied across generations.
+          </p>
+        </article>
+
+        <article class="embassy-card fade-up">
+          <h3>The Rally Point</h3>
+          <p>
+            A dynamic business ecosystem designed for purpose-driven entrepreneurs and builders.
+          </p>
+          <p style="margin-top: 14px;">
+            The Rally Point brings together business incubation, innovation, and inspiration within a unique environment shaped around the sport of pickleball. It creates space for visionaries to grow, collaborate, and build ventures that are both economically strong and missionally aligned.
+          </p>
+        </article>
+
+        <article class="embassy-card fade-up">
+          <h3>The Connection Café</h3>
+          <p>
+            A café and bakery experience designed to restore the depth of human connection.
+          </p>
+          <p style="margin-top: 14px;">
+            By thoughtfully leveraging technology, The Connection Café creates guided and intentional interactions that move beyond surface-level conversation. It serves as a platform where meaningful relationships can form naturally in a space people already love to gather.
+          </p>
+        </article>
+
+        <article class="embassy-card fade-up">
+          <h3>Home-Work Youth Empowerment</h3>
+          <p>
+            An inner-city youth initiative focused on developing the whole person while preparing the next generation for real opportunity.
+          </p>
+          <p style="margin-top: 14px;">
+            Home-Work prioritizes holistic wellbeing while equipping young people with leadership skills, purpose, and practical readiness for the workforce. It exists to empower youth with the vision, tools, and confidence needed to build a viable future and step into economic mobility.
+          </p>
+        </article>
+      </div>
+
+      <div class="statement fade-up" style="margin-top: 28px;">
+        Each embassy meets people where they are, while opening a pathway to who they are becoming.
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="process">
+    <div class="container">
+      <div class="centered fade-up">
+        <div class="eyebrow">How It Works</div>
+        <h2>A Clear Pathway of Discipleship and Sending</h2>
+      </div>
+      <div class="steps-grid">
+        <div class="step fade-up">
+          <div class="step-number">01</div>
+          <h3>Encounter</h3>
+          <p>People encounter an embassy through everyday life.</p>
+        </div>
+        <div class="step fade-up">
+          <div class="step-number">02</div>
+          <h3>Relationship</h3>
+          <p>Connection leads to meaningful relationships.</p>
+        </div>
+        <div class="step fade-up">
+          <div class="step-number">03</div>
+          <h3>Invitation</h3>
+          <p>Individuals are invited into house annexes.</p>
+        </div>
+        <div class="step fade-up">
+          <div class="step-number">04</div>
+          <h3>Formation</h3>
+          <p>Deep discipleship and transformation take place.</p>
+        </div>
+        <div class="step fade-up">
+          <div class="step-number">05</div>
+          <h3>Sending</h3>
+          <p>Disciples are deployed back into the city as ambassadors.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="partners">
+    <div class="container two-col">
+      <div class="fade-up">
+        <div class="eyebrow">For Leaders &amp; Partners</div>
+        <h2>Built for Partnership, Planting, and Long-Term Impact</h2>
+      </div>
+      <div class="quote-block fade-up">
+        <p>
+          Opheilo Embassy is a framework that can be partnered with, planted in new cities, and supported through investment and collaboration.
+        </p>
+        <p>
+          We are building something that is reproducible, decentralized, deeply rooted in Scripture, and designed for long-term cultural impact.
+        </p>
+        <div class="hero-actions" style="margin-top: 26px;">
+          <a href="mailto:hello@opheiloembassy.org" class="button primary">Start a Conversation</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section final-section">
+    <div class="container centered fade-up">
+      <div class="eyebrow">Final Word</div>
+      <h2>Establishing What Ought to Be</h2>
+      <p>This is more than a model.</p>
+      <p>It is a return to the way of Jesus.</p>
+      <p>A people formed in His presence.</p>
+      <p>A people sent into the world.</p>
+      <p style="color: var(--silver-bright);">A city transformed by His Kingdom.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">© 2026 Opheilo Embassy. All rights reserved.</div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
