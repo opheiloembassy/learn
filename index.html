@@ -55,10 +55,6 @@
       mix-blend-mode: screen;
     }
 
-    body.menu-open {
-      overflow: hidden;
-    }
-
     a {
       color: inherit;
       text-decoration: none;
@@ -67,10 +63,6 @@
     img {
       max-width: 100%;
       display: block;
-    }
-
-    button {
-      font: inherit;
     }
 
     .container {
@@ -167,7 +159,7 @@
       min-height: 76px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
       gap: 20px;
       position: relative;
     }
@@ -203,52 +195,6 @@
       letter-spacing: 0.28em;
       color: var(--text-soft);
       margin-top: 4px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      font-size: 0.92rem;
-      color: var(--text-soft);
-    }
-
-    .nav-links a {
-      transition: color 0.25s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--silver-bright);
-    }
-
-    .menu-toggle {
-      display: none;
-      width: 52px;
-      height: 52px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.04);
-      color: var(--text);
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      position: relative;
-      z-index: 3;
-      flex-shrink: 0;
-    }
-
-    .menu-toggle span {
-      display: block;
-      width: 18px;
-      height: 1.5px;
-      background: var(--silver-bright);
-      margin: 4px 0;
-      transition: transform 0.25s ease, opacity 0.25s ease;
-    }
-
-    .menu-overlay {
-      display: none;
     }
 
     .hero-grid {
@@ -613,61 +559,6 @@
     }
 
     @media (max-width: 760px) {
-      .nav-inner {
-        min-height: 76px;
-      }
-
-      .menu-toggle {
-        display: inline-flex;
-      }
-
-      .nav-links {
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: min(86vw, 340px);
-        height: 100vh;
-        background: rgba(8, 8, 8, 0.98);
-        backdrop-filter: blur(18px);
-        border-left: 1px solid rgba(255,255,255,0.08);
-        box-shadow: -20px 0 60px rgba(0,0,0,0.45);
-        padding: 96px 28px 32px;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        gap: 18px;
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-        z-index: 45;
-      }
-
-      .nav-links.open {
-        transform: translateX(0);
-      }
-
-      .nav-links a {
-        font-size: 1rem;
-        width: 100%;
-        padding: 6px 0;
-      }
-
-      .menu-overlay {
-        display: block;
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.5);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.3s ease;
-        z-index: 44;
-      }
-
-      .menu-overlay.open {
-        opacity: 1;
-        pointer-events: auto;
-      }
-
       .hero {
         min-height: auto;
         padding-top: 50px;
@@ -687,7 +578,7 @@
 
       .brand-wrap {
         align-items: center;
-        max-width: calc(100% - 70px);
+        max-width: 100%;
       }
 
       .brand-logo {
@@ -728,27 +619,8 @@
           <small>Establishing What Ought to Be</small>
         </div>
       </a>
-
-      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
-        <div>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </button>
-
-      <div class="nav-links" id="mobileMenu">
-        <a href="#about">About</a>
-        <a href="#model">Model</a>
-        <a href="#mission">Mission</a>
-        <a href="#embassies">Embassies</a>
-        <a href="#process">How It Works</a>
-        <a href="#partners">Partners</a>
-      </div>
     </div>
   </nav>
-
-  <div class="menu-overlay" id="menuOverlay"></div>
 
   <header class="hero" id="top">
     <div class="container hero-grid">
@@ -777,14 +649,6 @@
 
           <div class="hero-slideshow">
             <div class="hero-slide active"><img src="images/1.svg" alt="Slideshow image 1"></div>
-            <div class="hero-slide"><img src="images/2.svg" alt="Slideshow image 2"></div>
-            <div class="hero-slide"><img src="images/3.svg" alt="Slideshow image 3"></div>
-            <div class="hero-slide"><img src="images/4.svg" alt="Slideshow image 4"></div>
-            <div class="hero-slide"><img src="images/5.svg" alt="Slideshow image 5"></div>
-            <div class="hero-slide"><img src="images/6.svg" alt="Slideshow image 6"></div>
-            <div class="hero-slide"><img src="images/7.svg" alt="Slideshow image 7"></div>
-            <div class="hero-slide"><img src="images/8.svg" alt="Slideshow image 8"></div>
-            <div class="hero-slide"><img src="images/9.svg" alt="Slideshow image 9"></div>
             <div class="hero-slide"><img src="images/10.svg" alt="Slideshow image 10"></div>
             <div class="hero-slide"><img src="images/11.svg" alt="Slideshow image 11"></div>
             <div class="hero-slide"><img src="images/12.svg" alt="Slideshow image 12"></div>
@@ -1084,6 +948,18 @@
   </footer>
 
   <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+
+    window.addEventListener('load', () => {
+      window.scrollTo(0, 0);
+    });
+
+    window.addEventListener('pageshow', () => {
+      window.scrollTo(0, 0);
+    });
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
