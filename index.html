@@ -291,10 +291,34 @@
       z-index: 1;
     }
 
+    .hero-media {
+      position: relative;
+      width: 100%;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .hero-full-logo-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 8px 8px 0;
+    }
+
+    .hero-full-logo {
+      width: 100%;
+      max-width: 240px;
+      height: auto;
+      object-fit: contain;
+      filter: brightness(1.08) contrast(1.05);
+    }
+
     .hero-slideshow {
       position: relative;
       width: 100%;
-      min-height: 560px;
+      min-height: 470px;
       border-radius: 18px;
       overflow: hidden;
       background: rgba(255,255,255,0.02);
@@ -492,11 +516,12 @@
       max-width: 104px;
       height: 104px;
       object-fit: contain;
-      border-radius: 18px;
-      padding: 12px;
-      background: rgba(255,255,255,0.96);
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.28);
+      padding: 0;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      filter: brightness(1.06) contrast(1.02);
     }
 
     .steps-grid {
@@ -663,32 +688,29 @@
       </div>
 
       <aside class="hero-panel fade-up">
-        <div class="hero-slideshow">
-          <div class="hero-slide active"><img src="images/1.svg" alt="Slideshow image 1"></div>
-          <div class="hero-slide"><img src="images/2.svg" alt="Slideshow image 2"></div>
-          <div class="hero-slide"><img src="images/3.svg" alt="Slideshow image 3"></div>
-          <div class="hero-slide"><img src="images/4.svg" alt="Slideshow image 4"></div>
-          <div class="hero-slide"><img src="images/5.svg" alt="Slideshow image 5"></div>
-          <div class="hero-slide"><img src="images/6.svg" alt="Slideshow image 6"></div>
-          <div class="hero-slide"><img src="images/7.svg" alt="Slideshow image 7"></div>
-          <div class="hero-slide"><img src="images/8.svg" alt="Slideshow image 8"></div>
-          <div class="hero-slide"><img src="images/9.svg" alt="Slideshow image 9"></div>
-          <div class="hero-slide"><img src="images/10.svg" alt="Slideshow image 10"></div>
-          <div class="hero-slide"><img src="images/11.svg" alt="Slideshow image 11"></div>
-          <div class="hero-slide"><img src="images/12.svg" alt="Slideshow image 12"></div>
-          <div class="hero-slide"><img src="images/13.svg" alt="Slideshow image 13"></div>
-          <div class="hero-slide"><img src="images/14.svg" alt="Slideshow image 14"></div>
-          <div class="hero-slide"><img src="images/15.svg" alt="Slideshow image 15"></div>
-          <div class="hero-slide"><img src="images/16.svg" alt="Slideshow image 16"></div>
-          <div class="hero-slide"><img src="images/17.svg" alt="Slideshow image 17"></div>
-          <div class="hero-slide"><img src="images/18.svg" alt="Slideshow image 18"></div>
-          <div class="hero-slide"><img src="images/19.svg" alt="Slideshow image 19"></div>
-          <div class="hero-slide"><img src="images/20.svg" alt="Slideshow image 20"></div>
-          <div class="hero-slide"><img src="images/21.svg" alt="Slideshow image 21"></div>
-          <div class="hero-slide"><img src="images/22.svg" alt="Slideshow image 22"></div>
-          <div class="hero-slide"><img src="images/23.svg" alt="Slideshow image 23"></div>
-          <div class="hero-slideshow-overlay"></div>
-          <div class="hero-slideshow-caption">City Formation</div>
+        <div class="hero-media">
+          <div class="hero-full-logo-wrap">
+            <img src="images/opheilo%CC%84%20EMBASSY.svg" alt="Opheilo Embassy full logo" class="hero-full-logo">
+          </div>
+
+          <div class="hero-slideshow">
+            <div class="hero-slide active"><img src="images/10.svg" alt="Slideshow image 10"></div>
+            <div class="hero-slide"><img src="images/11.svg" alt="Slideshow image 11"></div>
+            <div class="hero-slide"><img src="images/12.svg" alt="Slideshow image 12"></div>
+            <div class="hero-slide"><img src="images/13.svg" alt="Slideshow image 13"></div>
+            <div class="hero-slide"><img src="images/14.svg" alt="Slideshow image 14"></div>
+            <div class="hero-slide"><img src="images/15.svg" alt="Slideshow image 15"></div>
+            <div class="hero-slide"><img src="images/16.svg" alt="Slideshow image 16"></div>
+            <div class="hero-slide"><img src="images/17.svg" alt="Slideshow image 17"></div>
+            <div class="hero-slide"><img src="images/18.svg" alt="Slideshow image 18"></div>
+            <div class="hero-slide"><img src="images/19.svg" alt="Slideshow image 19"></div>
+            <div class="hero-slide"><img src="images/20.svg" alt="Slideshow image 20"></div>
+            <div class="hero-slide"><img src="images/21.svg" alt="Slideshow image 21"></div>
+            <div class="hero-slide"><img src="images/22.svg" alt="Slideshow image 22"></div>
+            <div class="hero-slide"><img src="images/23.svg" alt="Slideshow image 23"></div>
+            <div class="hero-slideshow-overlay"></div>
+            <div class="hero-slideshow-caption">City Formation</div>
+          </div>
         </div>
       </aside>
     </div>
@@ -950,9 +972,6 @@
         <p>
           We are building something that is reproducible, decentralized, deeply rooted in Scripture, and designed for long-term cultural impact.
         </p>
-        <div class="hero-actions" style="margin-top: 26px;">
-          <a href="mailto:hello@opheiloembassy.org" class="button primary">Start a Conversation</a>
-        </div>
       </div>
     </div>
   </section>
