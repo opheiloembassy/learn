@@ -163,6 +163,20 @@
       gap: 20px;
     }
 
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-logo {
+      width: 54px;
+      height: 54px;
+      object-fit: contain;
+      filter: brightness(1.12) contrast(1.05);
+      flex-shrink: 0;
+    }
+
     .brand {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.7rem;
@@ -201,7 +215,7 @@
       display: grid;
       grid-template-columns: 1.2fr 0.8fr;
       gap: 44px;
-      align-items: end;
+      align-items: center;
       position: relative;
       z-index: 1;
     }
@@ -262,6 +276,10 @@
       padding: 28px;
       position: relative;
       overflow: hidden;
+      min-height: 620px;
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
     }
 
     .hero-panel::before {
@@ -270,6 +288,61 @@
       inset: 0;
       background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent 45%);
       pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-slideshow {
+      position: relative;
+      width: 100%;
+      min-height: 560px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+      z-index: 0;
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    .hero-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-slideshow-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.12) 35%, rgba(0,0,0,0.32) 100%);
+      pointer-events: none;
+    }
+
+    .hero-slideshow-caption {
+      position: absolute;
+      left: 22px;
+      bottom: 20px;
+      z-index: 3;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--silver-bright);
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      backdrop-filter: blur(10px);
     }
 
     .panel-title {
@@ -396,8 +469,34 @@
       opacity: 0.7;
     }
 
+    .embassy-card-inner {
+      display: grid;
+      grid-template-columns: 1fr 120px;
+      gap: 24px;
+      align-items: start;
+    }
+
     .embassy-card h3 {
       margin-bottom: 10px;
+    }
+
+    .embassy-logo-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 8px;
+    }
+
+    .embassy-logo {
+      width: 100%;
+      max-width: 104px;
+      height: 104px;
+      object-fit: contain;
+      border-radius: 18px;
+      padding: 12px;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.28);
     }
 
     .steps-grid {
@@ -466,6 +565,14 @@
       .steps-grid .step {
         min-height: auto;
       }
+
+      .hero-panel {
+        min-height: 420px;
+      }
+
+      .hero-slideshow {
+        min-height: 380px;
+      }
     }
 
     @media (max-width: 760px) {
@@ -495,15 +602,35 @@
       .quote-block {
         padding: 24px;
       }
+
+      .brand-wrap {
+        align-items: center;
+      }
+
+      .brand-logo {
+        width: 46px;
+        height: 46px;
+      }
+
+      .embassy-card-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .embassy-logo-wrap {
+        justify-content: flex-start;
+      }
     }
   </style>
 </head>
 <body>
   <nav class="nav">
     <div class="container nav-inner">
-      <a href="#top" class="brand">
-        Opheilo Embassy
-        <small>Establishing What Ought to Be</small>
+      <a href="#top" class="brand-wrap">
+        <img src="images/opheilo%CC%84%20EMBASSY.svg" alt="Opheilo Embassy logo" class="brand-logo">
+        <div class="brand">
+          Opheilo Embassy
+          <small>Establishing What Ought to Be</small>
+        </div>
       </a>
       <div class="nav-links">
         <a href="#about">About</a>
@@ -536,12 +663,32 @@
       </div>
 
       <aside class="hero-panel fade-up">
-        <div class="panel-title">The Framework</div>
-        <div class="panel-line">Formation in homes. Expression in the city.</div>
-        <div class="panel-stack">
-          <div class="pill">House Annexes for discipleship, prayer, Scripture, and shared life.</div>
-          <div class="pill">Business Embassies that engage real needs and open doors for transformation.</div>
-          <div class="pill">A complementary expression that carries the life of the Church into everyday environments.</div>
+        <div class="hero-slideshow">
+          <div class="hero-slide active"><img src="images/1.svg" alt="Slideshow image 1"></div>
+          <div class="hero-slide"><img src="images/2.svg" alt="Slideshow image 2"></div>
+          <div class="hero-slide"><img src="images/3.svg" alt="Slideshow image 3"></div>
+          <div class="hero-slide"><img src="images/4.svg" alt="Slideshow image 4"></div>
+          <div class="hero-slide"><img src="images/5.svg" alt="Slideshow image 5"></div>
+          <div class="hero-slide"><img src="images/6.svg" alt="Slideshow image 6"></div>
+          <div class="hero-slide"><img src="images/7.svg" alt="Slideshow image 7"></div>
+          <div class="hero-slide"><img src="images/8.svg" alt="Slideshow image 8"></div>
+          <div class="hero-slide"><img src="images/9.svg" alt="Slideshow image 9"></div>
+          <div class="hero-slide"><img src="images/10.svg" alt="Slideshow image 10"></div>
+          <div class="hero-slide"><img src="images/11.svg" alt="Slideshow image 11"></div>
+          <div class="hero-slide"><img src="images/12.svg" alt="Slideshow image 12"></div>
+          <div class="hero-slide"><img src="images/13.svg" alt="Slideshow image 13"></div>
+          <div class="hero-slide"><img src="images/14.svg" alt="Slideshow image 14"></div>
+          <div class="hero-slide"><img src="images/15.svg" alt="Slideshow image 15"></div>
+          <div class="hero-slide"><img src="images/16.svg" alt="Slideshow image 16"></div>
+          <div class="hero-slide"><img src="images/17.svg" alt="Slideshow image 17"></div>
+          <div class="hero-slide"><img src="images/18.svg" alt="Slideshow image 18"></div>
+          <div class="hero-slide"><img src="images/19.svg" alt="Slideshow image 19"></div>
+          <div class="hero-slide"><img src="images/20.svg" alt="Slideshow image 20"></div>
+          <div class="hero-slide"><img src="images/21.svg" alt="Slideshow image 21"></div>
+          <div class="hero-slide"><img src="images/22.svg" alt="Slideshow image 22"></div>
+          <div class="hero-slide"><img src="images/23.svg" alt="Slideshow image 23"></div>
+          <div class="hero-slideshow-overlay"></div>
+          <div class="hero-slideshow-caption">City Formation</div>
         </div>
       </aside>
     </div>
@@ -680,43 +827,71 @@
 
       <div class="embassy-grid">
         <article class="embassy-card fade-up">
-          <h3>Hawkins House</h3>
-          <p>
-            A Christ-centered family development initiative focused on restoring and strengthening the foundation of the home.
-          </p>
-          <p style="margin-top: 14px;">
-            Hawkins House equips parents to intentionally build a culture of discipleship within their families through clear, comprehensive pathways. It helps transform the home from a place of routine into a place of formation, where faith is lived, modeled, and multiplied across generations.
-          </p>
+          <div class="embassy-card-inner">
+            <div>
+              <h3>Hawkins House</h3>
+              <p>
+                A Christ-centered family development initiative focused on restoring and strengthening the foundation of the home.
+              </p>
+              <p style="margin-top: 14px;">
+                Hawkins House equips parents to intentionally build a culture of discipleship within their families through clear, comprehensive pathways. It helps transform the home from a place of routine into a place of formation, where faith is lived, modeled, and multiplied across generations.
+              </p>
+            </div>
+            <div class="embassy-logo-wrap">
+              <img src="images/Hawkins%20House-2.svg" alt="Hawkins House logo" class="embassy-logo">
+            </div>
+          </div>
         </article>
 
         <article class="embassy-card fade-up">
-          <h3>The Rally Point</h3>
-          <p>
-            A dynamic business ecosystem designed for purpose-driven entrepreneurs and builders.
-          </p>
-          <p style="margin-top: 14px;">
-            The Rally Point brings together business incubation, innovation, and inspiration within a unique environment shaped around the sport of pickleball. It creates space for visionaries to grow, collaborate, and build ventures that are both economically strong and missionally aligned.
-          </p>
+          <div class="embassy-card-inner">
+            <div>
+              <h3>The Rally Point</h3>
+              <p>
+                A dynamic business ecosystem designed for purpose-driven entrepreneurs and builders.
+              </p>
+              <p style="margin-top: 14px;">
+                The Rally Point brings together business incubation, innovation, and inspiration within a unique environment shaped around the sport of pickleball. It creates space for visionaries to grow, collaborate, and build ventures that are both economically strong and missionally aligned.
+              </p>
+            </div>
+            <div class="embassy-logo-wrap">
+              <img src="images/rallypoint.svg" alt="The Rally Point logo" class="embassy-logo">
+            </div>
+          </div>
         </article>
 
         <article class="embassy-card fade-up">
-          <h3>The Connection Café</h3>
-          <p>
-            A café and bakery experience designed to restore the depth of human connection.
-          </p>
-          <p style="margin-top: 14px;">
-            By thoughtfully leveraging technology, The Connection Café creates guided and intentional interactions that move beyond surface-level conversation. It serves as a platform where meaningful relationships can form naturally in a space people already love to gather.
-          </p>
+          <div class="embassy-card-inner">
+            <div>
+              <h3>The Connection Café &amp; Bakery</h3>
+              <p>
+                A café and bakery experience designed to restore the depth of human connection.
+              </p>
+              <p style="margin-top: 14px;">
+                By thoughtfully leveraging technology, The Connection Café creates guided and intentional interactions that move beyond surface-level conversation. It serves as a platform where meaningful relationships can form naturally in a space people already love to gather.
+              </p>
+            </div>
+            <div class="embassy-logo-wrap">
+              <img src="images/connection.svg" alt="The Connection Cafe and Bakery logo" class="embassy-logo">
+            </div>
+          </div>
         </article>
 
         <article class="embassy-card fade-up">
-          <h3>Home-Work Youth Empowerment</h3>
-          <p>
-            An inner-city youth initiative focused on developing the whole person while preparing the next generation for real opportunity.
-          </p>
-          <p style="margin-top: 14px;">
-            Home-Work prioritizes holistic wellbeing while equipping young people with leadership skills, purpose, and practical readiness for the workforce. It exists to empower youth with the vision, tools, and confidence needed to build a viable future and step into economic mobility.
-          </p>
+          <div class="embassy-card-inner">
+            <div>
+              <h3>Home-Work Youth Empowerment</h3>
+              <p>
+                An inner-city youth initiative focused on developing the whole person while preparing the next generation for real opportunity.
+              </p>
+              <p style="margin-top: 14px;">
+                Home-Work prioritizes holistic wellbeing while equipping young people with leadership skills, purpose, and practical readiness for the workforce. It exists to empower youth with the vision, tools, and confidence needed to build a viable future and step into economic mobility.
+              </p>
+            </div>
+            <div class="embassy-logo-wrap">
+              <img src="images/homework.svg" alt="Home-Work Youth Empowerment logo" class="embassy-logo">
+            </div>
+          </div>
         </article>
       </div>
 
@@ -808,6 +983,17 @@
     }, { threshold: 0.15 });
 
     document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+
+    const slides = document.querySelectorAll('.hero-slide');
+    let currentSlide = 0;
+
+    if (slides.length > 1) {
+      setInterval(() => {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+      }, 3000);
+    }
   </script>
 </body>
 </html>
